@@ -1,0 +1,4 @@
+--ui bdd
+-r ts-node/register
+--recursive
+--project tsconfig.spec.json
