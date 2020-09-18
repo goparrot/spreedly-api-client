@@ -1,0 +1,97 @@
+{
+    "name": "@goparrot/spreedly-api",
+    "version": "0.0.0-dev.2181.0",
+    "description": "Typescript library which implements Spreedly API",
+    "engines": {
+        "node": ">=12 || >=14"
+    },
+    "main": "src/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/goparrot/spreedly-api-client"
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS && npm run pre-commit",
+            "post-commit": "git update-index --again"
+        }
+    },
+    "lint-staged": {
+        "*.{ts,tsx,json,js,jsx}": [
+            "npm run format:base"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-conventional-changelog"
+        }
+    },
+    "scripts": {
+        "commit": "git-cz",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+        "test:e2e": "jest --config ./test/jest-e2e.json",
+        "coverage": "jest --coverage",
+        "build:dist": "rm -rf dist/* && tsc --project tsconfig.build.json",
+        "remark": "remark README.md CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md .github/ -o -f -q && git add .",
+        "lint": "npm run lint:base -- '.'",
+        "lint:base": "npm run lint:config:check && eslint --ignore-path .gitignore --ext .ts,.tsx,.json,.js,.jsx",
+        "lint:config:check": "eslint --print-config src/index.ts | eslint-config-prettier-check",
+        "format": "npm run format:base -- '.'",
+        "format:base": "npm run lint:base -- --fix",
+        "format:staged": "git add . && lint-staged",
+        "pre-commit": "git add . && npm run format:staged && npm run lint && npm run coverage && npm run build:dist",
+        "prepublishOnly": "echo \"use 'npm run publish'\" && exit 1",
+        "publish": "npm run build:dist && node bin/prepublish.js && npm publish dist",
+        "publish:dev": "npm run publish --tag dev",
+        "publish:dev:dry": "npm run publish:dev --dry-run",
+        "version": "echo \"use 'npm run release'\" && exit 1",
+        "release": "standard-version && git push && git push --tags && npm run publish && npm run github-release",
+        "release:dry": "npm run publish:dev:dry && standard-version --dry-run"
+    },
+    "author": "GoParrot",
+    "license": "MIT",
+    "peerDependencies": {
+        "axios": ">=0.18.2",
+        "axios-retry": "^3.0.0",
+        "deepmerge": "^3.2.0 || ^4.0.0",
+        "class-transformer": ">=0.2.0"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^8.3.5",
+        "@commitlint/config-conventional": "^8.3.4",
+        "@commitlint/travis-cli": "^8.3.5",
+        "@types/chai": "^4.2.11",
+        "@types/jest": "^25.2.1",
+        "@types/node": "^14.11.5",
+        "@typescript-eslint/eslint-plugin": "^2.25.0",
+        "@typescript-eslint/parser": "^2.25.0",
+        "axios": "^0.19.2",
+        "axios-mock-adapter": "^1.18.1",
+        "axios-retry": "^3.1.8",
+        "chai": "^4.2.0",
+        "class-transformer": "^0.2.3",
+        "commitizen": "^4.1.2",
+        "deepmerge": "^4.2.2",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.1",
+        "eslint-import-resolver-typescript": "^2.0.0",
+        "eslint-plugin-import": "^2.20.1",
+        "eslint-plugin-prettier": "^3.1.2",
+        "husky": "^4.2.5",
+        "jest": "^26.0.1",
+        "lint-staged": "^10.2.2",
+        "nock": "^12.0.3",
+        "prettier": "^2.0.5",
+        "remark-frontmatter": "^2.0.0",
+        "remark-github": "^9.0.0",
+        "remark-lint-emphasis-marker": "^2.0.0",
+        "remark-lint-strong-marker": "^2.0.0",
+        "standard-version": "^8.0.0",
+        "ts-jest": "^25.5.1",
+        "ts-node": "^8.10.1",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^3.8.3"
+    }
+}
