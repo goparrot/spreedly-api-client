@@ -17,7 +17,7 @@ describe('SpreedlyCapture (unit)', (): void => {
 
     describe('#create', () => {
         it('should return plain to class data', async () => {
-            const transaction_token = 'AE97510D-1283-4752-9FFA-00BC99D40AFD';
+            const transactionToken = 'AE97510D-1283-4752-9FFA-00BC99D40AFD';
 
             const fakeSpreedlyCaptureTransaction: ISpreedlyTransactionRes = {
                 transaction: {
@@ -27,8 +27,8 @@ describe('SpreedlyCapture (unit)', (): void => {
                 },
             };
 
-            mock.onPost(`transactions/${transaction_token}/capture`).reply(200, fakeSpreedlyCaptureTransaction);
-            const data = await capture.create(transaction_token);
+            mock.onPost(`transactions/${transactionToken}/capture`).reply(200, fakeSpreedlyCaptureTransaction);
+            const data = await capture.create(transactionToken);
             expect(JSON.parse(JSON.stringify(fakeSpreedlyCaptureTransaction))).toEqual(data);
             expect(data instanceof SpreedlyTransactionResModel).toBe(true);
         });

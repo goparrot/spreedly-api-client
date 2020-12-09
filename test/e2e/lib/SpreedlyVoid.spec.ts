@@ -20,9 +20,9 @@ describe('SpreedlyVoid (e2e)', (): void => {
 
             mock = new MockAdapter(spreedlyVoid.client);
 
-            mock.onPost('/transactions/transaction_token/void').reply(401, { errors: accessDeniedErrors });
+            mock.onPost('/transactions/transactionToken/void').reply(401, { errors: accessDeniedErrors });
 
-            await spreedlyVoid.void('transaction_token').catch((e) => {
+            await spreedlyVoid.void('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(401);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accessDeniedErrors);
@@ -30,9 +30,9 @@ describe('SpreedlyVoid (e2e)', (): void => {
         }, 20000);
 
         it('should not retry with status 402', async () => {
-            mock.onPost('/transactions/transaction_token/void').reply(402, { errors: accountInactiveErrors });
+            mock.onPost('/transactions/transactionToken/void').reply(402, { errors: accountInactiveErrors });
 
-            await spreedlyVoid.void('transaction_token').catch((e) => {
+            await spreedlyVoid.void('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(402);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accountInactiveErrors);
@@ -57,27 +57,27 @@ describe('SpreedlyVoid (e2e)', (): void => {
         });
 
         it('should not retry with status 408', async () => {
-            mock.onPost('/transactions/transaction_token/void').reply(408);
+            mock.onPost('/transactions/transactionToken/void').reply(408);
 
-            await spreedlyVoid.void('transaction_token').catch((e) => {
+            await spreedlyVoid.void('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(408);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 429', async () => {
-            mock.onPost('/transactions/transaction_token/void').reply(429);
+            mock.onPost('/transactions/transactionToken/void').reply(429);
 
-            await spreedlyVoid.void('transaction_token').catch((e) => {
+            await spreedlyVoid.void('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(429);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 500', async () => {
-            mock.onPost('/transactions/transaction_token/void').reply(500);
+            mock.onPost('/transactions/transactionToken/void').reply(500);
 
-            await spreedlyVoid.void('transaction_token').catch((e) => {
+            await spreedlyVoid.void('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
@@ -92,18 +92,18 @@ describe('SpreedlyVoid (e2e)', (): void => {
 
             mock = new MockAdapter(spreedlyVoid.client);
 
-            mock.onPost('/transactions/transaction_token/void').reply(500);
+            mock.onPost('/transactions/transactionToken/void').reply(500);
 
-            await spreedlyVoid.void('transaction_token').catch((e) => {
+            await spreedlyVoid.void('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 503', async () => {
-            mock.onPost('/transactions/transaction_token/void').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPost('/transactions/transactionToken/void').reply(503, { errors: serviceUnavailableErrors });
 
-            await spreedlyVoid.void('transaction_token').catch((e) => {
+            await spreedlyVoid.void('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);
@@ -120,9 +120,9 @@ describe('SpreedlyVoid (e2e)', (): void => {
 
             mock = new MockAdapter(spreedlyVoid.client);
 
-            mock.onPost('/transactions/transaction_token/void').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPost('/transactions/transactionToken/void').reply(503, { errors: serviceUnavailableErrors });
 
-            await spreedlyVoid.void('transaction_token').catch((e) => {
+            await spreedlyVoid.void('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);

@@ -16,8 +16,8 @@ describe('SpreedlyRedact (unit)', (): void => {
 
     describe('#redact', () => {
         it('should return plain to class data', async () => {
-            mock.onPut('/payment_methods/payment_method_token/redact').reply(200, fakeSpreedlyRedact);
-            const data = await spreedlyRedact.redact('payment_method_token');
+            mock.onPut('/payment_methods/paymentMethodToken/redact').reply(200, fakeSpreedlyRedact);
+            const data = await spreedlyRedact.redact('paymentMethodToken');
             expect(JSON.parse(JSON.stringify(fakeSpreedlyRedact))).toEqual(data);
             expect(data instanceof SpreedlyRedactModel).toBe(true);
         });

@@ -20,9 +20,9 @@ describe('SpreedlyAuthorize (e2e)', (): void => {
 
             mock = new MockAdapter(authorize.client);
 
-            mock.onPost('gateways/gateway_token/authorize').reply(401, { errors: accessDeniedErrors });
+            mock.onPost('gateways/gatewayToken/authorize').reply(401, { errors: accessDeniedErrors });
 
-            await authorize.create('gateway_token', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
+            await authorize.create('gatewayToken', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
                 expect(e.response.status).toBe(401);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accessDeniedErrors);
@@ -30,9 +30,9 @@ describe('SpreedlyAuthorize (e2e)', (): void => {
         }, 20000);
 
         it('should not retry with status 402', async () => {
-            mock.onPost('gateways/gateway_token/authorize').reply(402, { errors: accountInactiveErrors });
+            mock.onPost('gateways/gatewayToken/authorize').reply(402, { errors: accountInactiveErrors });
 
-            await authorize.create('gateway_token', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
+            await authorize.create('gatewayToken', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
                 expect(e.response.status).toBe(402);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accountInactiveErrors);
@@ -57,9 +57,9 @@ describe('SpreedlyAuthorize (e2e)', (): void => {
         });
 
         it('should not retry with status 408', async () => {
-            mock.onPost('gateways/gateway_token/authorize').reply(408);
+            mock.onPost('gateways/gatewayToken/authorize').reply(408);
 
-            await authorize.create('gateway_token', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
+            await authorize.create('gatewayToken', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
                 expect(e.response.status).toBe(408);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
@@ -75,9 +75,9 @@ describe('SpreedlyAuthorize (e2e)', (): void => {
                 },
             ];
 
-            mock.onPost('gateways/gateway_token/authorize').reply(422, { errors });
+            mock.onPost('gateways/gatewayToken/authorize').reply(422, { errors });
 
-            await authorize.create('gateway_token', fakeSpreedlyInvalidAuthTokenizedPaymentMethodReq).catch((e) => {
+            await authorize.create('gatewayToken', fakeSpreedlyInvalidAuthTokenizedPaymentMethodReq).catch((e) => {
                 expect(e.response.status).toBe(422);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(errors);
@@ -85,18 +85,18 @@ describe('SpreedlyAuthorize (e2e)', (): void => {
         });
 
         it('should not retry with status 429', async () => {
-            mock.onPost('gateways/gateway_token/authorize').reply(429);
+            mock.onPost('gateways/gatewayToken/authorize').reply(429);
 
-            await authorize.create('gateway_token', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
+            await authorize.create('gatewayToken', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
                 expect(e.response.status).toBe(429);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 500', async () => {
-            mock.onPost('gateways/gateway_token/authorize').reply(500);
+            mock.onPost('gateways/gatewayToken/authorize').reply(500);
 
-            await authorize.create('gateway_token', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
+            await authorize.create('gatewayToken', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
@@ -111,18 +111,18 @@ describe('SpreedlyAuthorize (e2e)', (): void => {
 
             mock = new MockAdapter(authorize.client);
 
-            mock.onPost('gateways/gateway_token/authorize').reply(500);
+            mock.onPost('gateways/gatewayToken/authorize').reply(500);
 
-            await authorize.create('gateway_token', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
+            await authorize.create('gatewayToken', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 503', async () => {
-            mock.onPost('gateways/gateway_token/authorize').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPost('gateways/gatewayToken/authorize').reply(503, { errors: serviceUnavailableErrors });
 
-            await authorize.create('gateway_token', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
+            await authorize.create('gatewayToken', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);
@@ -139,9 +139,9 @@ describe('SpreedlyAuthorize (e2e)', (): void => {
 
             mock = new MockAdapter(authorize.client);
 
-            mock.onPost('gateways/gateway_token/authorize').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPost('gateways/gatewayToken/authorize').reply(503, { errors: serviceUnavailableErrors });
 
-            await authorize.create('gateway_token', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
+            await authorize.create('gatewayToken', fakeSpreedlyAuthTokenizedPaymentMethodReq).catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);

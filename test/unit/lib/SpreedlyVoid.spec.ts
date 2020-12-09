@@ -16,8 +16,8 @@ describe('SpreedlyVoid (unit)', (): void => {
 
     describe('#void', () => {
         it('should return plain to class data', async () => {
-            mock.onPost('/transactions/transaction_token/void').reply(200, fakeSpreedlyVoidTransactionRes);
-            const data = await spreedlyVoid.void('transaction_token');
+            mock.onPost('/transactions/transactionToken/void').reply(200, fakeSpreedlyVoidTransactionRes);
+            const data = await spreedlyVoid.void('transactionToken');
             expect(JSON.parse(JSON.stringify(fakeSpreedlyVoidTransactionRes))).toEqual(data);
             expect(data instanceof SpreedlyVoidModel).toBe(true);
         });

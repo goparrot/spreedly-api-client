@@ -21,9 +21,9 @@ describe('SpreedlyDeliver (e2e)', (): void => {
 
             mock = new MockAdapter(deliver.client);
 
-            mock.onPost('receivers/receiver_token/deliver').reply(401, { errors: accessDeniedErrors });
+            mock.onPost('receivers/receiverToken/deliver').reply(401, { errors: accessDeniedErrors });
 
-            await deliver.create('receiver_token', fakeSpreedlyDeliverReq).catch((e) => {
+            await deliver.create('receiverToken', fakeSpreedlyDeliverReq).catch((e) => {
                 expect(e.response.status).toBe(401);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accessDeniedErrors);
@@ -31,9 +31,9 @@ describe('SpreedlyDeliver (e2e)', (): void => {
         }, 20000);
 
         it('should not retry with status 402', async () => {
-            mock.onPost('receivers/receiver_token/deliver').reply(402, { errors: accountInactiveErrors });
+            mock.onPost('receivers/receiverToken/deliver').reply(402, { errors: accountInactiveErrors });
 
-            await deliver.create('receiver_token', fakeSpreedlyDeliverReq).catch((e) => {
+            await deliver.create('receiverToken', fakeSpreedlyDeliverReq).catch((e) => {
                 expect(e.response.status).toBe(402);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accountInactiveErrors);
@@ -58,18 +58,18 @@ describe('SpreedlyDeliver (e2e)', (): void => {
         });
 
         it('should not retry with status 408', async () => {
-            mock.onPost('receivers/receiver_token/deliver').reply(408);
+            mock.onPost('receivers/receiverToken/deliver').reply(408);
 
-            await deliver.create('receiver_token', fakeSpreedlyDeliverReq).catch((e) => {
+            await deliver.create('receiverToken', fakeSpreedlyDeliverReq).catch((e) => {
                 expect(e.response.status).toBe(408);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 422', async () => {
-            mock.onPost('receivers/receiver_token/deliver').reply(422, { errors: fakeSpreedlyDeliverError });
+            mock.onPost('receivers/receiverToken/deliver').reply(422, { errors: fakeSpreedlyDeliverError });
 
-            await deliver.create('receiver_token', fakeInvalidSpreedlyDeliverReq).catch((e) => {
+            await deliver.create('receiverToken', fakeInvalidSpreedlyDeliverReq).catch((e) => {
                 expect(e.response.status).toBe(422);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(fakeSpreedlyDeliverError);
@@ -77,18 +77,18 @@ describe('SpreedlyDeliver (e2e)', (): void => {
         });
 
         it('should not retry with status 429', async () => {
-            mock.onPost('receivers/receiver_token/deliver').reply(429);
+            mock.onPost('receivers/receiverToken/deliver').reply(429);
 
-            await deliver.create('receiver_token', fakeSpreedlyDeliverReq).catch((e) => {
+            await deliver.create('receiverToken', fakeSpreedlyDeliverReq).catch((e) => {
                 expect(e.response.status).toBe(429);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 500', async () => {
-            mock.onPost('receivers/receiver_token/deliver').reply(500);
+            mock.onPost('receivers/receiverToken/deliver').reply(500);
 
-            await deliver.create('receiver_token', fakeSpreedlyDeliverReq).catch((e) => {
+            await deliver.create('receiverToken', fakeSpreedlyDeliverReq).catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
@@ -103,18 +103,18 @@ describe('SpreedlyDeliver (e2e)', (): void => {
 
             mock = new MockAdapter(deliver.client);
 
-            mock.onPost('receivers/receiver_token/deliver').reply(500);
+            mock.onPost('receivers/receiverToken/deliver').reply(500);
 
-            await deliver.create('receiver_token', fakeSpreedlyDeliverReq).catch((e) => {
+            await deliver.create('receiverToken', fakeSpreedlyDeliverReq).catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 503', async () => {
-            mock.onPost('receivers/receiver_token/deliver').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPost('receivers/receiverToken/deliver').reply(503, { errors: serviceUnavailableErrors });
 
-            await deliver.create('receiver_token', fakeSpreedlyDeliverReq).catch((e) => {
+            await deliver.create('receiverToken', fakeSpreedlyDeliverReq).catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);
@@ -131,9 +131,9 @@ describe('SpreedlyDeliver (e2e)', (): void => {
 
             mock = new MockAdapter(deliver.client);
 
-            mock.onPost('receivers/receiver_token/deliver').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPost('receivers/receiverToken/deliver').reply(503, { errors: serviceUnavailableErrors });
 
-            await deliver.create('receiver_token', fakeSpreedlyDeliverReq).catch((e) => {
+            await deliver.create('receiverToken', fakeSpreedlyDeliverReq).catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);

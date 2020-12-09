@@ -20,9 +20,9 @@ describe('SpreedlyRetain (e2e)', (): void => {
 
             mock = new MockAdapter(spreedlyRetain.client);
 
-            mock.onPut('/payment_methods/payment_method_token/retain').reply(401, { errors: accessDeniedErrors });
+            mock.onPut('/payment_methods/paymentMethodToken/retain').reply(401, { errors: accessDeniedErrors });
 
-            await spreedlyRetain.retain('payment_method_token').catch((e) => {
+            await spreedlyRetain.retain('paymentMethodToken').catch((e) => {
                 expect(e.response.status).toBe(401);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accessDeniedErrors);
@@ -30,9 +30,9 @@ describe('SpreedlyRetain (e2e)', (): void => {
         }, 20000);
 
         it('should not retry with status 402', async () => {
-            mock.onPut('/payment_methods/payment_method_token/retain').reply(402, { errors: accountInactiveErrors });
+            mock.onPut('/payment_methods/paymentMethodToken/retain').reply(402, { errors: accountInactiveErrors });
 
-            await spreedlyRetain.retain('payment_method_token').catch((e) => {
+            await spreedlyRetain.retain('paymentMethodToken').catch((e) => {
                 expect(e.response.status).toBe(402);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accountInactiveErrors);
@@ -57,27 +57,27 @@ describe('SpreedlyRetain (e2e)', (): void => {
         });
 
         it('should not retry with status 408', async () => {
-            mock.onPut('/payment_methods/payment_method_token/retain').reply(408);
+            mock.onPut('/payment_methods/paymentMethodToken/retain').reply(408);
 
-            await spreedlyRetain.retain('payment_method_token').catch((e) => {
+            await spreedlyRetain.retain('paymentMethodToken').catch((e) => {
                 expect(e.response.status).toBe(408);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 429', async () => {
-            mock.onPut('/payment_methods/payment_method_token/retain').reply(429);
+            mock.onPut('/payment_methods/paymentMethodToken/retain').reply(429);
 
-            await spreedlyRetain.retain('payment_method_token').catch((e) => {
+            await spreedlyRetain.retain('paymentMethodToken').catch((e) => {
                 expect(e.response.status).toBe(429);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should do 3 retries with status 500', async () => {
-            mock.onPut('/payment_methods/payment_method_token/retain').reply(500);
+            mock.onPut('/payment_methods/paymentMethodToken/retain').reply(500);
 
-            await spreedlyRetain.retain('payment_method_token').catch((e) => {
+            await spreedlyRetain.retain('paymentMethodToken').catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(3);
             });
@@ -92,18 +92,18 @@ describe('SpreedlyRetain (e2e)', (): void => {
 
             mock = new MockAdapter(spreedlyRetain.client);
 
-            mock.onPut('/payment_methods/payment_method_token/retain').reply(500);
+            mock.onPut('/payment_methods/paymentMethodToken/retain').reply(500);
 
-            await spreedlyRetain.retain('payment_method_token').catch((e) => {
+            await spreedlyRetain.retain('paymentMethodToken').catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(6);
             });
         }, 20000);
 
         it('should do 3 retries with status 503', async () => {
-            mock.onPut('/payment_methods/payment_method_token/retain').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPut('/payment_methods/paymentMethodToken/retain').reply(503, { errors: serviceUnavailableErrors });
 
-            await spreedlyRetain.retain('payment_method_token').catch((e) => {
+            await spreedlyRetain.retain('paymentMethodToken').catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(3);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);
@@ -120,9 +120,9 @@ describe('SpreedlyRetain (e2e)', (): void => {
 
             mock = new MockAdapter(spreedlyVoid.client);
 
-            mock.onPut('/payment_methods/payment_method_token/retain').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPut('/payment_methods/paymentMethodToken/retain').reply(503, { errors: serviceUnavailableErrors });
 
-            await spreedlyVoid.retain('payment_method_token').catch((e) => {
+            await spreedlyVoid.retain('paymentMethodToken').catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(6);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);

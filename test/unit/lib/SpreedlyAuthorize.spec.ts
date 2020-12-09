@@ -24,8 +24,8 @@ describe('SpreedlyAuthorize (unit)', (): void => {
                     response: { ...fakeSpreedlyTransaction.response, message: 'Successful authorize' },
                 },
             };
-            mock.onPost('/gateways/gateway_token/authorize', fakeSpreedlyAuthTokenizedPaymentMethodReq).reply(200, fakeSpreedlyAuthorizeTransaction);
-            const data = await authorize.create('gateway_token', fakeSpreedlyAuthTokenizedPaymentMethodReq);
+            mock.onPost('/gateways/gatewayToken/authorize', fakeSpreedlyAuthTokenizedPaymentMethodReq).reply(200, fakeSpreedlyAuthorizeTransaction);
+            const data = await authorize.create('gatewayToken', fakeSpreedlyAuthTokenizedPaymentMethodReq);
             expect(JSON.parse(JSON.stringify(fakeSpreedlyAuthorizeTransaction))).toEqual(data);
             expect(data instanceof SpreedlyTransactionResModel).toBe(true);
         });

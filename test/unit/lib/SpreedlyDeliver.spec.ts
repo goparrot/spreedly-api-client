@@ -16,8 +16,8 @@ describe('SpreedlyDeliver (unit)', (): void => {
 
     describe('#create', () => {
         it('should return plain to class data', async () => {
-            mock.onPost('/receivers/receiver_token/deliver', fakeSpreedlyDeliverReq).reply(200, fakeSpreedlyDeliverRes);
-            const data = await deliver.create('receiver_token', fakeSpreedlyDeliverReq);
+            mock.onPost('/receivers/receiverToken/deliver', fakeSpreedlyDeliverReq).reply(200, fakeSpreedlyDeliverRes);
+            const data = await deliver.create('receiverToken', fakeSpreedlyDeliverReq);
             expect(JSON.parse(JSON.stringify(fakeSpreedlyDeliverRes))).toEqual(data);
             expect(data instanceof SpreedlyDeliverModel).toBe(true);
         });

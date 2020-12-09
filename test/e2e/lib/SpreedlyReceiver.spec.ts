@@ -21,9 +21,9 @@ describe('SpreedlyReceiver (e2e)', (): void => {
 
             mock = new MockAdapter(receiver.client);
 
-            mock.onGet('/receivers/receiver_token').reply(401, { errors: accessDeniedErrors });
+            mock.onGet('/receivers/receiverToken').reply(401, { errors: accessDeniedErrors });
 
-            await receiver.show('receiver_token').catch((e) => {
+            await receiver.show('receiverToken').catch((e) => {
                 expect(e.response.status).toBe(401);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accessDeniedErrors);
@@ -31,9 +31,9 @@ describe('SpreedlyReceiver (e2e)', (): void => {
         }, 20000);
 
         it('should not retry with status 402', async () => {
-            mock.onGet('/receivers/receiver_token').reply(402, { errors: accountInactiveErrors });
+            mock.onGet('/receivers/receiverToken').reply(402, { errors: accountInactiveErrors });
 
-            await receiver.show('receiver_token').catch((e) => {
+            await receiver.show('receiverToken').catch((e) => {
                 expect(e.response.status).toBe(402);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accountInactiveErrors);
@@ -58,36 +58,36 @@ describe('SpreedlyReceiver (e2e)', (): void => {
         });
 
         it('should not retry with status 408', async () => {
-            mock.onGet('/receivers/receiver_token').reply(408);
+            mock.onGet('/receivers/receiverToken').reply(408);
 
-            await receiver.show('receiver_token').catch((e) => {
+            await receiver.show('receiverToken').catch((e) => {
                 expect(e.response.status).toBe(408);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 422', async () => {
-            mock.onGet('/receivers/receiver_token').reply(422);
+            mock.onGet('/receivers/receiverToken').reply(422);
 
-            await receiver.show('receiver_token').catch((e) => {
+            await receiver.show('receiverToken').catch((e) => {
                 expect(e.response.status).toBe(422);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 429', async () => {
-            mock.onGet('/receivers/receiver_token').reply(429);
+            mock.onGet('/receivers/receiverToken').reply(429);
 
-            await receiver.show('receiver_token').catch((e) => {
+            await receiver.show('receiverToken').catch((e) => {
                 expect(e.response.status).toBe(429);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should do 3 retries with status 500', async () => {
-            mock.onGet('/receivers/receiver_token').reply(500);
+            mock.onGet('/receivers/receiverToken').reply(500);
 
-            await receiver.show('receiver_token').catch((e) => {
+            await receiver.show('receiverToken').catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(3);
             });
@@ -103,18 +103,18 @@ describe('SpreedlyReceiver (e2e)', (): void => {
 
             mock = new MockAdapter(receiver.client);
 
-            mock.onGet('/receivers/receiver_token').reply(500);
+            mock.onGet('/receivers/receiverToken').reply(500);
 
-            await receiver.show('receiver_token').catch((e) => {
+            await receiver.show('receiverToken').catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(6);
             });
         }, 20000);
 
         it('should do 3 retries with status 503', async () => {
-            mock.onGet('/receivers/receiver_token').reply(503, { errors: serviceUnavailableErrors });
+            mock.onGet('/receivers/receiverToken').reply(503, { errors: serviceUnavailableErrors });
 
-            await receiver.show('receiver_token').catch((e) => {
+            await receiver.show('receiverToken').catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(3);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);
@@ -131,9 +131,9 @@ describe('SpreedlyReceiver (e2e)', (): void => {
 
             mock = new MockAdapter(receiver.client);
 
-            mock.onGet('/receivers/receiver_token').reply(503, { errors: serviceUnavailableErrors });
+            mock.onGet('/receivers/receiverToken').reply(503, { errors: serviceUnavailableErrors });
 
-            await receiver.show('receiver_token').catch((e) => {
+            await receiver.show('receiverToken').catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(6);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);

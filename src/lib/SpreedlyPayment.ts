@@ -17,9 +17,9 @@ export class SpreedlyPayment extends SpreedlyApiConfig {
         return plainToClass(SpreedlyPaymentResModel, response.data);
     }
 
-    async update(payload: ISpreedlyPaymentMethodUpdateReq, payment_method_token: string): Promise<SpreedlyPaymentResModel> {
+    async update(payload: ISpreedlyPaymentMethodUpdateReq, paymentMethodToken: string): Promise<SpreedlyPaymentResModel> {
         const response: AxiosResponse<ISpreedlyPaymentMethod> = await this.client.put<ISpreedlyPaymentMethod>(
-            `/payment_methods/${payment_method_token}`,
+            `/payment_methods/${paymentMethodToken}`,
             payload,
         );
 
