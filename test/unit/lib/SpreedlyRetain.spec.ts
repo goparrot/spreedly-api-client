@@ -16,8 +16,8 @@ describe('SpreedlyRetain (unit)', (): void => {
 
     describe('#retain', () => {
         it('should return plain to class data', async () => {
-            mock.onPut('/payment_methods/payment_method_token/retain').reply(200, fakeSpreedlyRetain);
-            const data = await spreedlyRetain.retain('payment_method_token');
+            mock.onPut('/payment_methods/paymentMethodToken/retain').reply(200, fakeSpreedlyRetain);
+            const data = await spreedlyRetain.retain('paymentMethodToken');
             expect(JSON.parse(JSON.stringify(fakeSpreedlyRetain))).toEqual(data);
             expect(data instanceof SpreedlyRetainModel).toBe(true);
         });

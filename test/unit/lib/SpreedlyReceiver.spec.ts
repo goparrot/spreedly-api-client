@@ -16,8 +16,8 @@ describe('SpreedlyReceiver (unit)', (): void => {
 
     describe('#show', () => {
         it('should return plain to class data', async () => {
-            mock.onGet('/receivers/receiver_token').reply(200, fakeSpreedlyReceiverRes);
-            const data = await receiver.show('receiver_token');
+            mock.onGet('/receivers/receiverToken').reply(200, fakeSpreedlyReceiverRes);
+            const data = await receiver.show('receiverToken');
             expect(JSON.parse(JSON.stringify(fakeSpreedlyReceiverRes))).toEqual(data);
             expect(data instanceof SpreedlyReceiverResModel).toBe(true);
         });

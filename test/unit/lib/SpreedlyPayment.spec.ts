@@ -25,8 +25,8 @@ describe('SpreedlyPayment (unit)', (): void => {
     describe('#update', () => {
         it('should return plain to class data', async () => {
             const fakeSpreedlyPay = { payment_methods: [{ ...fakeSpreedlyPayment, metadata: { ...fakeSpreedlyPayment.metadata, userId: 'valid_user_id' } }] };
-            mock.onPut('/payment_methods/payment_method_token').reply(200, fakeSpreedlyPay);
-            const data = await payment.update(fakeSpreedlyValidPaymentListParams, 'payment_method_token');
+            mock.onPut('/payment_methods/paymentMethodToken').reply(200, fakeSpreedlyPay);
+            const data = await payment.update(fakeSpreedlyValidPaymentListParams, 'paymentMethodToken');
             expect(JSON.parse(JSON.stringify(fakeSpreedlyPay))).toEqual(data);
             expect(data instanceof SpreedlyPaymentResModel).toBe(true);
         });

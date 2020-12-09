@@ -20,9 +20,9 @@ describe('SpreedlyCapture (e2e)', (): void => {
 
             mock = new MockAdapter(capture.client);
 
-            mock.onPost('transactions/transaction_token/capture').reply(401, { errors: accessDeniedErrors });
+            mock.onPost('transactions/transactionToken/capture').reply(401, { errors: accessDeniedErrors });
 
-            await capture.create('transaction_token').catch((e) => {
+            await capture.create('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(401);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accessDeniedErrors);
@@ -30,9 +30,9 @@ describe('SpreedlyCapture (e2e)', (): void => {
         }, 20000);
 
         it('should not retry with status 402', async () => {
-            mock.onPost('transactions/transaction_token/capture').reply(402, { errors: accountInactiveErrors });
+            mock.onPost('transactions/transactionToken/capture').reply(402, { errors: accountInactiveErrors });
 
-            await capture.create('transaction_token').catch((e) => {
+            await capture.create('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(402);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(accountInactiveErrors);
@@ -47,9 +47,9 @@ describe('SpreedlyCapture (e2e)', (): void => {
                 },
             ];
 
-            mock.onPost('transactions/invalid_transaction_token/capture').reply(404, { errors });
+            mock.onPost('transactions/invalidTransactionToken/capture').reply(404, { errors });
 
-            await capture.create('invalid_transaction_token').catch((e) => {
+            await capture.create('invalidTransactionToken').catch((e) => {
                 expect(e.response.status).toBe(404);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(errors);
@@ -57,27 +57,27 @@ describe('SpreedlyCapture (e2e)', (): void => {
         });
 
         it('should not retry with status 408', async () => {
-            mock.onPost('transactions/transaction_token/capture').reply(408);
+            mock.onPost('transactions/transactionToken/capture').reply(408);
 
-            await capture.create('transaction_token').catch((e) => {
+            await capture.create('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(408);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 429', async () => {
-            mock.onPost('transactions/transaction_token/capture').reply(429);
+            mock.onPost('transactions/transactionToken/capture').reply(429);
 
-            await capture.create('transaction_token').catch((e) => {
+            await capture.create('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(429);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 500', async () => {
-            mock.onPost('transactions/transaction_token/capture').reply(500);
+            mock.onPost('transactions/transactionToken/capture').reply(500);
 
-            await capture.create('transaction_token').catch((e) => {
+            await capture.create('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
@@ -92,18 +92,18 @@ describe('SpreedlyCapture (e2e)', (): void => {
 
             mock = new MockAdapter(capture.client);
 
-            mock.onPost('transactions/transaction_token/capture').reply(500);
+            mock.onPost('transactions/transactionToken/capture').reply(500);
 
-            await capture.create('transaction_token').catch((e) => {
+            await capture.create('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(500);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
             });
         });
 
         it('should not retry with status 503', async () => {
-            mock.onPost('transactions/transaction_token/capture').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPost('transactions/transactionToken/capture').reply(503, { errors: serviceUnavailableErrors });
 
-            await capture.create('transaction_token').catch((e) => {
+            await capture.create('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);
@@ -120,9 +120,9 @@ describe('SpreedlyCapture (e2e)', (): void => {
 
             mock = new MockAdapter(authorize.client);
 
-            mock.onPost('transactions/transaction_token/capture').reply(503, { errors: serviceUnavailableErrors });
+            mock.onPost('transactions/transactionToken/capture').reply(503, { errors: serviceUnavailableErrors });
 
-            await authorize.create('transaction_token').catch((e) => {
+            await authorize.create('transactionToken').catch((e) => {
                 expect(e.response.status).toBe(503);
                 expect(e.config['axios-retry'].retryCount).toBe(0);
                 expect(e.response.data.errors).toEqual(serviceUnavailableErrors);

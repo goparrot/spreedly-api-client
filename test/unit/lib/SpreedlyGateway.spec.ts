@@ -15,8 +15,8 @@ describe('SpreedlyGateway (unit)', (): void => {
 
     describe('#show', () => {
         it('should return plain to class data', async () => {
-            mock.onGet('/gateways/gateway_token').reply(200, fakeGatewayRes);
-            const data = await gateway.show('gateway_token');
+            mock.onGet('/gateways/gatewayToken').reply(200, fakeGatewayRes);
+            const data = await gateway.show('gatewayToken');
             expect(JSON.parse(JSON.stringify(fakeGatewayRes))).toEqual(data);
             expect(data instanceof SpreedlyGatewayResModel).toBe(true);
         });
