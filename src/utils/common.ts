@@ -53,15 +53,13 @@ export function createAxiosInstance(config: IFacadeConfig): AxiosInstance {
         ),
     );
 
-    axios.interceptors.request.use(
-        async (axiosConfig: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
-            axiosConfig.params = {
-                format: config.format ?? SpreedlyPayloadResFormatEnum.JSON,
-            };
+    axios.interceptors.request.use(async (axiosConfig: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
+        axiosConfig.params = {
+            format: config.format ?? SpreedlyPayloadResFormatEnum.JSON,
+        };
 
-            return axiosConfig;
-        },
-    );
+        return axiosConfig;
+    });
 
     return axios;
 }
