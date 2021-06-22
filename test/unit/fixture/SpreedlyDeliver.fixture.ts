@@ -9,8 +9,7 @@ export const fakeSpreedlyDeliverReq: ISpreedlyDeliverReq = {
         request_method: 'PUT',
         url: 'https://ws-sandbox-api.eng.toasttab.com/ccpartner/v1/merchants/toast-restaurant-external-id/payments/paymentUuid',
         headers: 'Content-Type: application/json\r\nToast-Restaurant-External-ID: toast-restaurant-external-id\r\nAuthorization: Bearer bearer_token',
-        body:
-            '{"encryptedCardData":"{{#base64}}{{#rsa}}-----BEGIN PUBLIC KEY-----\n******\n-----END PUBLIC KEY-----,pkcs1,{"cardNumber":"{{credit_card_number}}","zipCode":"{{credit_card_zip}}","expMonth":"{{credit_card_month}}","expYear":"{{#format_date}}%y,{{credit_card_expiration_date}}{{/format_date}}", "country":"USA"}{{/rsa}}{{/base64}}","keyId":"RSAES-PKCS1-v1_5::ccpartner_sandbox", "amount":2.62,"tipAmount":0.00, "willSaveCard":true, "cardNumberOrigin":"PARTNER_VAULT", "requestMetadata":{"localTransactionDate":"2020-09-14T16:00:00.000+0000","partnerServiceInfo":{"instanceId":"TESTINGDATA"}}}',
+        body: '{"encryptedCardData":"{{#base64}}{{#rsa}}-----BEGIN PUBLIC KEY-----\n******\n-----END PUBLIC KEY-----,pkcs1,{"cardNumber":"{{credit_card_number}}","zipCode":"{{credit_card_zip}}","expMonth":"{{credit_card_month}}","expYear":"{{#format_date}}%y,{{credit_card_expiration_date}}{{/format_date}}", "country":"USA"}{{/rsa}}{{/base64}}","keyId":"RSAES-PKCS1-v1_5::ccpartner_sandbox", "amount":2.62,"tipAmount":0.00, "willSaveCard":true, "cardNumberOrigin":"PARTNER_VAULT", "requestMetadata":{"localTransactionDate":"2020-09-14T16:00:00.000+0000","partnerServiceInfo":{"instanceId":"TESTINGDATA"}}}',
     },
 };
 
@@ -21,8 +20,7 @@ export const fakeInvalidSpreedlyDeliverReq: ISpreedlyDeliverReq = {
         request_method: 'PUT',
         url: 'https://ws-sandbox-api.eng.toasttab.com/ccpartner/v1/merchants/toast-restaurant-external-id/payments/paymentUuid',
         headers: 'Content-Type: application/json\r\nToast-Restaurant-External-ID: toast-restaurant-external-id\r\nAuthorization: Bearer bearer_token',
-        body:
-            '{"encryptedCardData":"{{#base64}}{{#rsa}}-----BEGIN PUBLIC KEY-----\ninvalid_rsa_key\n-----END PUBLIC KEY-----,pkcs1,{"cardNumber":"{{credit_card_number}}","zipCode":"{{credit_card_zip}}","expMonth":"{{credit_card_month}}","expYear":"{{#format_date}}%y,{{credit_card_expiration_date}}{{/format_date}}", "country":"USA"}{{/rsa}}{{/base64}}","keyId":"RSAES-PKCS1-v1_5::ccpartner_sandbox", "amount":2.62,"tipAmount":0.00, "willSaveCard":true, "cardNumberOrigin":"PARTNER_VAULT", "requestMetadata":{"localTransactionDate":"2020-09-14T16:00:00.000+0000","partnerServiceInfo":{"instanceId":"TESTINGDATA"}}}',
+        body: '{"encryptedCardData":"{{#base64}}{{#rsa}}-----BEGIN PUBLIC KEY-----\ninvalid_rsa_key\n-----END PUBLIC KEY-----,pkcs1,{"cardNumber":"{{credit_card_number}}","zipCode":"{{credit_card_zip}}","expMonth":"{{credit_card_month}}","expYear":"{{#format_date}}%y,{{credit_card_expiration_date}}{{/format_date}}", "country":"USA"}{{/rsa}}{{/base64}}","keyId":"RSAES-PKCS1-v1_5::ccpartner_sandbox", "amount":2.62,"tipAmount":0.00, "willSaveCard":true, "cardNumberOrigin":"PARTNER_VAULT", "requestMetadata":{"localTransactionDate":"2020-09-14T16:00:00.000+0000","partnerServiceInfo":{"instanceId":"TESTINGDATA"}}}',
     },
 };
 
@@ -34,8 +32,7 @@ export const fakeSpreedlyDeliverError: ISpreedlyDeliverRes = {
         succeeded: false,
         message:
             'There was an error parsing your request template. Please make sure you adhere to the variable and function syntax and have matching {{ }} characters.',
-        url:
-            'https://ws-sandbox-api.eng.toasttab.com/ccpartner/v1/merchants/bfaa32ad-768f-4c9d-88a9-0b673933572b/payments/b9f85707-435b-47cf-99cf-4f04a45ed3b6',
+        url: 'https://ws-sandbox-api.eng.toasttab.com/ccpartner/v1/merchants/bfaa32ad-768f-4c9d-88a9-0b673933572b/payments/b9f85707-435b-47cf-99cf-4f04a45ed3b6',
         response: {
             status: null,
             headers: null,
@@ -100,13 +97,11 @@ export const fakeSpreedlyDeliverRes: ISpreedlyDeliverRes = {
         state: 'succeeded',
         succeeded: true,
         message: 'Succeeded!',
-        url:
-            'https://ws-sandbox-api.eng.toasttab.com/ccpartner/v1/merchants/bfaa32ad-768f-4c9d-88a9-0b673933572b/payments/b9f85707-435b-47cf-99cf-4f04a45ed3b6',
+        url: 'https://ws-sandbox-api.eng.toasttab.com/ccpartner/v1/merchants/bfaa32ad-768f-4c9d-88a9-0b673933572b/payments/b9f85707-435b-47cf-99cf-4f04a45ed3b6',
         response: {
             status: 200,
             headers: 'Server: Spreedly Echo Server\r\nConnection: close\r\nContent-Length: 628',
-            body:
-                '{"encryptedCardData":"&&&&&&&","keyId":"RSAES-PKCS1-v1_5::ccpartner_sandbox", "amount":2.62,"tipAmount":0.00, "willSaveCard":true, "cardNumberOrigin":"PARTNER_VAULT", "requestMetadata":{"localTransactionDate":"2020-09-14T16:00:00.000+0000","partnerServiceInfo":{"instanceId":"TESTINGDATA"}}}',
+            body: '{"encryptedCardData":"&&&&&&&","keyId":"RSAES-PKCS1-v1_5::ccpartner_sandbox", "amount":2.62,"tipAmount":0.00, "willSaveCard":true, "cardNumberOrigin":"PARTNER_VAULT", "requestMetadata":{"localTransactionDate":"2020-09-14T16:00:00.000+0000","partnerServiceInfo":{"instanceId":"TESTINGDATA"}}}',
         },
         receiver: {
             company_name: 'TEST',
